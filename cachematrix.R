@@ -1,7 +1,9 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Use R's Lexical Scoping to cache an inverse of a matrix
 
-## Write a short comment describing this function
+## Return a special object that can cache input matrix inverse
+## Note: the function will also cache the optional argumets of 'solve' function
+## Example: if the user used 'b' optional argument (right-hand side of the linear system)
+## 	then 'b' matrix will be cached as well
 
 makeCacheMatrix <- function(data.mat = matrix()) {
 	inverse <- NULL
@@ -29,6 +31,10 @@ makeCacheMatrix <- function(data.mat = matrix()) {
 }
 
 ## Return a matrix that is the inverse of 'x'
+## Note: The function compares the dot-dot-dot argumets to the cached copy.
+## If dot-dot-dot which may be right-hand side of the linear system is passed by the user,
+## The function will compare it to the cached copy!
+## If the value of 'b' is different than the cached copy, the function will re-evaluate the inverse
 
 cacheSolve <- function(mat.so, ...) {
 	this.dot.args <- list(...)
